@@ -30,7 +30,7 @@
             transition: opacity 0.5s;
         }
         .spinner {
-            width: 40px; height: 40px; border: 4px solid #333; border-top: 4px solid #00d2ff;
+            width: 40px; height: 40px; border: 4px solid #333; border-top: 4px solid #ffae00;
             border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -64,7 +64,7 @@
         }
         .status-text {
             font-size: 14px;
-            color: #00d2ff;
+            color: #ffae00;
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -108,10 +108,10 @@
         }
         .tension-bar {
             height: 100%;
-            background: #00d2ff;
+            background: #ffae00;
             width: 0%;
             transition: width 0.1s;
-            box-shadow: 0 0 10px #00d2ff;
+            box-shadow: 0 0 10px #ffae00;
         }
 
         /* Bottom Navigation */
@@ -138,7 +138,7 @@
             border-radius: 50%;
             border: 2px solid rgba(255,255,255,0.2);
             cursor: pointer;
-            background: #00d2ff;
+            background: #ffae00;
             transition: transform 0.2s;
             position: relative;
             overflow: hidden;
@@ -225,7 +225,7 @@
     <!-- Bottom Navigation -->
     <div id="bottom-nav">
         <div class="color-picker-btn" id="color-btn">
-            <input type="color" id="color-input" value="#00d2ff">
+            <input type="color" id="color-input" value="#ffae00">
         </div>
         <button class="shape-btn active" data-shape="Heart">Heart</button>
         <button class="shape-btn" data-shape="Flower">Flower</button>
@@ -282,7 +282,7 @@
         // --- CONFIGURATION ---
         const config = {
             shape: 'Heart',
-            color: '#00d2ff', // Updated default color to match UI
+            color: '#ffae00', // Updated default color to match UI
             particleSize: 0.15,
             rotationSpeed: 0.2,
             responsiveness: 0.1 // Lerp speed
@@ -509,7 +509,7 @@
                 
                 // Update UI
                 document.getElementById('input-mode').innerText = "HANDS";
-                document.getElementById('input-mode').style.color = "#00d2ff";
+                document.getElementById('input-mode').style.color = "#ffae00";
             } else {
                 // Idle breathing animation if no hands
                 targetScale = 1.0 + Math.sin(Date.now() * 0.002) * 0.1;
@@ -600,7 +600,7 @@
                     document.getElementById('loader').style.opacity = '0';
                     setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
                     statusText.innerText = "Camera Active. Hand Tracking On.";
-                    statusText.style.color = "#00d2ff";
+                    statusText.style.color = "#ffae00";
                 })
                 .catch(err => {
                     console.error("Camera error:", err);
