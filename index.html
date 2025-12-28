@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gesture Controlled 3D Particles</title>
+    <title>Happy 2nd Anniversary</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&display=swap');
 
@@ -30,7 +30,7 @@
             transition: opacity 0.5s;
         }
         .spinner {
-            width: 40px; height: 40px; border: 4px solid #333; border-top: 4px solid #ffae00;
+            width: 40px; height: 40px; border: 4px solid #333; border-top: 4px solid #0091ff;
             border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 15px;
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -64,7 +64,7 @@
         }
         .status-text {
             font-size: 14px;
-            color: #ffae00;
+            color: #0091ff;
             margin-bottom: 15px;
             padding-bottom: 15px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -108,10 +108,32 @@
         }
         .tension-bar {
             height: 100%;
-            background: #ffae00;
+            background: #0091ff;
             width: 0%;
             transition: width 0.1s;
-            box-shadow: 0 0 10px #ffae00;
+            box-shadow: 0 0 10px #0091ff;
+        }
+
+        /* Main Title */
+        #main-title {
+            position: absolute;
+            top: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: "Times New Roman", serif;
+            font-size: 30px;
+            font-weight: bold;
+            font-style: italic;
+            letter-spacing: 2px;
+            color: #fff;
+            text-shadow: 0 0 10px #0091ff, 0 0 20px #0091ff, 0 0 40px #0091ff, 0 0 80px #0091ff;
+            z-index: 10;
+            pointer-events: none;
+            text-transform: uppercase;
+            opacity: 1;
+            transition: opacity 0.5s;
+            white-space: nowrap;
+            text-align: center;
         }
 
         /* Bottom Navigation */
@@ -138,7 +160,7 @@
             border-radius: 50%;
             border: 2px solid rgba(255,255,255,0.2);
             cursor: pointer;
-            background: #ffae00;
+            background: #0091ff;
             transition: transform 0.2s;
             position: relative;
             overflow: hidden;
@@ -175,6 +197,88 @@
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
         }
 
+        /* Gallery Styles */
+        #gallery-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 5; pointer-events: none;
+            display: flex; justify-content: center; align-items: center;
+            perspective: 1200px;
+            opacity: 0; transition: opacity 0.5s;
+        }
+        .gallery-card {
+            position: absolute;
+            width: 50vw; height: 60vh;
+            max-width: 800px; max-height: 600px;
+            background-size: cover; background-position: center;
+            border-radius: 16px;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+            transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.4s, opacity 0.4s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background-color: #000;
+            /* Performance optimizations */
+            backface-visibility: hidden;
+            will-change: transform;
+        }
+        .gallery-card.center {
+            z-index: 10;
+            transform: translate3d(0, 0, 0);
+            filter: none;
+            opacity: 1;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+        .gallery-card.left {
+            z-index: 5;
+            transform: translate3d(-60%, 0, -300px) rotateY(35deg);
+            filter: blur(8px) brightness(0.4) grayscale(0.5);
+            opacity: 0.6;
+        }
+        .gallery-card.right {
+            z-index: 5;
+            transform: translate3d(60%, 0, -300px) rotateY(-35deg);
+            filter: blur(8px) brightness(0.4) grayscale(0.5);
+            opacity: 0.6;
+        }
+
+        /* Karaoke Text */
+        #karaoke-container {
+            position: absolute;
+            bottom: 50px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 20;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        .karaoke-line {
+            font-size: 24px;
+            font-weight: 700;
+            color: rgba(255, 255, 255, 0.3);
+            transition: all 0.5s;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            max-width: 80%;
+        }
+        .karaoke-line.active {
+            color: #fff;
+            font-size: 28px;
+            text-shadow: 0 0 10px #0091ff, 0 0 20px #0091ff, 0 0 40px #0091ff;
+            transform: scale(1.05);
+        }
+        .karaoke-line.highlight {
+            background: linear-gradient(90deg, #fff 0%, #fff 50%, rgba(255,255,255,0.3) 50%);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: karaoke-wipe 4s linear forwards;
+        }
+        @keyframes karaoke-wipe {
+            from { background-position: 100% 0; }
+            to { background-position: 0% 0; }
+        }
+
     </style>
 </head>
 <body>
@@ -182,17 +286,23 @@
     <!-- Loading Screen -->
     <div id="loader">
         <div class="spinner"></div>
-        <div>Initializing AI & Particles...</div>
+        <div>Đang khởi tạo AI & Hiệu ứng...</div>
+    </div>
+
+    <!-- Main Title -->
+    <div id="main-title">
+        Happy 2nd Anniversary<br>
+        <small>Anhrighthere & Phunolg</small>
     </div>
 
     <!-- Control System Panel -->
     <div id="control-panel" class="panel">
-        <div class="panel-title">Control System</div>
-        <div id="system-status" class="status-text">Initializing Camera...</div>
+        <div class="panel-title">Hướng Dẫn Điều Khiển</div>
+        <div id="system-status" class="status-text">Đang khởi động Camera...</div>
         <div class="controls-list">
-            <div class="control-item"><span class="icon">🖱️</span> Left Drag: Rotate View</div>
-            <div class="control-item"><span class="icon">🖱️</span> Scroll Wheel: Zoom</div>
-            <div class="control-item"><span class="icon">✋</span> Hands: Pull apart to Expand</div>
+            <div class="control-item"><span class="icon">✋</span> Đưa tay lên trước Camera để bắt đầu</div>
+            <div class="control-item"><span class="icon">↔️</span> Mở rộng hai tay: Để xem thông điệp</div>
+            <div class="control-item"><span class="icon">👋</span> Di chuyển tay: Xoay khối 3D & Xem ảnh</div>
         </div>
     </div>
 
@@ -225,14 +335,19 @@
     <!-- Bottom Navigation -->
     <div id="bottom-nav">
         <div class="color-picker-btn" id="color-btn">
-            <input type="color" id="color-input" value="#ffae00">
+            <input type="color" id="color-input" value="#0091ff">
         </div>
         <button class="shape-btn active" data-shape="Heart">Heart</button>
         <button class="shape-btn" data-shape="Flower">Flower</button>
         <button class="shape-btn" data-shape="Saturn">Saturn</button>
-        <button class="shape-btn" data-shape="Buddha">Spirit</button>
         <button class="shape-btn" data-shape="Fireworks">Bang</button>
+        <button id="music-btn" class="shape-btn">Music: OFF</button>
     </div>
+
+    <!-- Audio Element -->
+    <audio id="bg-music" loop>
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
 
     <!-- Webcam Feed (Visual Feedback) -->
     <div id="video-container">
@@ -241,6 +356,18 @@
 
     <!-- 3D Canvas -->
     <div id="canvas-container"></div>
+
+    <!-- Gallery Overlay -->
+    <div id="gallery-container">
+        <div class="gallery-card left" id="img-left"></div>
+        <div class="gallery-card center" id="img-center"></div>
+        <div class="gallery-card right" id="img-right"></div>
+        
+        <div id="karaoke-container">
+            <div id="karaoke-line-1" class="karaoke-line"></div>
+            <div id="karaoke-line-2" class="karaoke-line"></div>
+        </div>
+    </div>
 
     <!-- Dependencies: Three.js, MediaPipe -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
@@ -266,14 +393,49 @@
         // --- GLOBAL VARIABLES ---
         let scene, camera, renderer, particles, geometry, material;
         let targetPositions = []; // Where particles want to go
+        let randomOffsets = []; // Random vectors for galaxy scatter effect
+        let heartLayer = []; // 0 = inner, 1 = outer
         const PARTICLE_COUNT = 15000;
         let currentShape = 'Heart';
         let handDistance = 0.5; // Normalized 0 to 1
         let isHandDetected = false;
         let smoothedScale = 1.0;
         let targetRotationX = 0;
-        let targetRotationY = 0;
+        let rotationVelocity = 0.002;
+        let previousHandX = null;
+        let musicTriggeredByGalaxy = false;
         
+        // Karaoke Data
+        const karaokeLyrics = [
+            { text: "Thanh Phương à, vậy là mình đã đi cùng nhau tròn 2 năm rồi đó ❤️", duration: 5000 },
+            { text: "Anh muốn nói lời cảm ơn em, vì suốt quãng thời gian ấy", duration: 5000 },
+            { text: "em đã ở bên anh bằng tất cả sự dịu dàng, kiên nhẫn và yêu thương.", duration: 5000 },
+            { text: "Cảm ơn em vì những lúc vui có nhau để cười thật to", duration: 4000 },
+            { text: "và cả những lúc buồn, mệt mỏi, vẫn chọn nắm tay anh mà không rời đi.", duration: 5000 },
+            { text: "Cảm ơn em vì đã yêu anh không chỉ khi anh tốt nhất", duration: 4000 },
+            { text: "mà cả khi anh vụng về, thiếu sót và chưa hoàn hảo.", duration: 4000 },
+            { text: "2 năm không phải là quá dài cho cả một đời người", duration: 4000 },
+            { text: "nhưng đủ dài để anh chắc chắn một điều:", duration: 3000 },
+            { text: "có em bên cạnh, mọi thứ đều trở nên đáng giá hơn.", duration: 4000 },
+            { text: "Anh mong rằng sau 2 năm này, mình sẽ còn thêm rất nhiều năm nữa", duration: 5000 },
+            { text: "vẫn là Thanh Phương và Tuấn Anh, vẫn cùng nhau mỗi ngày", duration: 4000 },
+            { text: "vẫn thương nhau theo cách giản dị nhưng chân thành nhất.", duration: 4000 },
+            { text: "Cảm ơn em vì đã đến, đã ở lại và đã yêu anh 💕", duration: 5000 },
+            { text: "Anh yêu em, không chỉ hôm nay, mà là cả chặng đường phía trước.", duration: 5000 }
+        ];
+        let karaokeStartTime = 0;
+        let karaokePausedTime = 0;
+        let currentKaraokeIndex = -1;
+
+        // Gallery Data
+        const imageList = [
+            'TAN_6262.jpg', 'TAN_6328.jpg', 'TAN_6354.jpg', 'TAN_6403.jpg', 
+            'TAN_6410.jpg', 'TAN_6432.jpg', 'TAN_6539.jpg', 'TAN_6584.jpg', 
+            'TAN_6678.jpg', 'TAN_6694.jpg'
+        ];
+        let currentImageIndex = 0;
+        let lastGalleryUpdate = 0;
+
         // FPS Counter
         let lastTime = 0;
         let frameCount = 0;
@@ -282,11 +444,19 @@
         // --- CONFIGURATION ---
         const config = {
             shape: 'Heart',
-            color: '#ffae00', // Updated default color to match UI
+            color: '#0091ff', // Updated default color to match UI
             particleSize: 0.15,
             rotationSpeed: 0.2,
             responsiveness: 0.1 // Lerp speed
         };
+
+        // --- PRELOAD IMAGES ---
+        function preloadImages() {
+            imageList.forEach(filename => {
+                const img = new Image();
+                img.src = `pictures/${filename}`;
+            });
+        }
 
         // --- INIT THREE.JS ---
         function initThree() {
@@ -320,15 +490,36 @@
         function createParticleSystem() {
             geometry = new THREE.BufferGeometry();
             const positions = new Float32Array(PARTICLE_COUNT * 3);
+            randomOffsets = new Float32Array(PARTICLE_COUNT * 3);
+            heartLayer = new Float32Array(PARTICLE_COUNT);
+            const colors = new Float32Array(PARTICLE_COUNT * 3);
             
+            const initialColor = new THREE.Color(config.color);
+
             // Initial Random Positions
             for (let i = 0; i < PARTICLE_COUNT; i++) {
                 positions[i * 3] = (Math.random() - 0.5) * 50;
                 positions[i * 3 + 1] = (Math.random() - 0.5) * 50;
                 positions[i * 3 + 2] = (Math.random() - 0.5) * 50;
+
+                // Initialize colors
+                colors[i * 3] = initialColor.r;
+                colors[i * 3 + 1] = initialColor.g;
+                colors[i * 3 + 2] = initialColor.b;
+
+                // Generate random scatter vectors for galaxy effect
+                // Spread more horizontally for a disc-like galaxy feel
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.acos(2 * Math.random() - 1);
+                const r = 10 + Math.random() * 40; // Random radius
+                
+                randomOffsets[i * 3] = r * Math.sin(phi) * Math.cos(theta);
+                randomOffsets[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta);
+                randomOffsets[i * 3 + 2] = r * Math.cos(phi);
             }
 
             geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 
             // Generate Soft Glow Texture Procedurally
             const canvas = document.createElement('canvas');
@@ -342,7 +533,8 @@
             const texture = new THREE.CanvasTexture(canvas);
 
             material = new THREE.PointsMaterial({
-                color: config.color,
+                color: 0xffffff, // Use white to allow vertex colors to show through
+                vertexColors: true,
                 size: config.particleSize,
                 map: texture,
                 transparent: true,
@@ -372,72 +564,58 @@
                     x = 16 * Math.pow(Math.sin(t), 3) * Math.sin(phi);
                     y = (13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t)) * Math.sin(phi);
                     z = 6 * Math.cos(phi); 
-                    // Scale down
-                    x *= 0.5; y *= 0.5; z *= 0.5;
+                    
+                    // Nested Heart: Inner (0.5) and Outer (0.8)
+                    const isInner = Math.random() < 0.5;
+                    const scale = isInner ? 0.5 : 0.8;
+                    x *= scale; y *= scale; z *= scale;
+                    
+                    heartLayer[i] = isInner ? 0 : 1;
                 } 
-                else if (shapeType === 'Saturn') {
-                    const r = Math.random();
-                    if (r < 0.3) {
-                        // Planet Body
+                else {
+                    heartLayer[i] = 0; // Reset for other shapes
+                    
+                    if (shapeType === 'Saturn') {
+                        const r = Math.random();
+                        if (r < 0.3) {
+                            // Planet Body
+                            const theta = Math.random() * Math.PI * 2;
+                            const phi = Math.acos(2 * Math.random() - 1);
+                            const rad = 4;
+                            x = rad * Math.sin(phi) * Math.cos(theta);
+                            y = rad * Math.sin(phi) * Math.sin(theta);
+                            z = rad * Math.cos(phi);
+                        } else {
+                            // Rings
+                            const angle = Math.random() * Math.PI * 2;
+                            const dist = 6 + Math.random() * 6;
+                            x = Math.cos(angle) * dist;
+                            y = (Math.random() - 0.5) * 0.5; // Thin ring
+                            z = Math.sin(angle) * dist;
+                            // Tilt ring
+                            const tilt = 0.4;
+                            const yt = y * Math.cos(tilt) - z * Math.sin(tilt);
+                            const zt = y * Math.sin(tilt) + z * Math.cos(tilt);
+                            y = yt; z = zt;
+                        }
+                    }
+                    else if (shapeType === 'Flower') {
+                        const u = Math.random() * Math.PI * 2;
+                        const v = Math.random() * Math.PI;
+                        const r = 5 * (1 + 0.5 * Math.sin(5 * u) * Math.sin(5 * v));
+                        x = r * Math.sin(v) * Math.cos(u);
+                        y = r * Math.sin(v) * Math.sin(u);
+                        z = r * Math.cos(v);
+                    }
+                    else if (shapeType === 'Fireworks') {
+                        // Sphere explosion
                         const theta = Math.random() * Math.PI * 2;
                         const phi = Math.acos(2 * Math.random() - 1);
-                        const rad = 4;
+                        const rad = Math.random() * 15;
                         x = rad * Math.sin(phi) * Math.cos(theta);
                         y = rad * Math.sin(phi) * Math.sin(theta);
                         z = rad * Math.cos(phi);
-                    } else {
-                        // Rings
-                        const angle = Math.random() * Math.PI * 2;
-                        const dist = 6 + Math.random() * 6;
-                        x = Math.cos(angle) * dist;
-                        y = (Math.random() - 0.5) * 0.5; // Thin ring
-                        z = Math.sin(angle) * dist;
-                        // Tilt ring
-                        const tilt = 0.4;
-                        const yt = y * Math.cos(tilt) - z * Math.sin(tilt);
-                        const zt = y * Math.sin(tilt) + z * Math.cos(tilt);
-                        y = yt; z = zt;
                     }
-                }
-                else if (shapeType === 'Flower') {
-                    const u = Math.random() * Math.PI * 2;
-                    const v = Math.random() * Math.PI;
-                    const r = 5 * (1 + 0.5 * Math.sin(5 * u) * Math.sin(5 * v));
-                    x = r * Math.sin(v) * Math.cos(u);
-                    y = r * Math.sin(v) * Math.sin(u);
-                    z = r * Math.cos(v);
-                }
-                else if (shapeType === 'Buddha') {
-                    // Procedural "Meditating Figure" (Stacked Spheres/Ovals approximation)
-                    const r = Math.random();
-                    if (r < 0.2) { // Head
-                        const theta = Math.random() * Math.PI * 2;
-                        const phi = Math.acos(2 * Math.random() - 1);
-                        x = 2.5 * Math.sin(phi) * Math.cos(theta);
-                        y = 2.5 * Math.sin(phi) * Math.sin(theta) + 6;
-                        z = 2.5 * Math.cos(phi);
-                    } else if (r < 0.6) { // Body
-                        const theta = Math.random() * Math.PI * 2;
-                        const phi = Math.acos(2 * Math.random() - 1);
-                        x = 4 * Math.sin(phi) * Math.cos(theta);
-                        y = 5 * Math.sin(phi) * Math.sin(theta); // Oval stretch
-                        z = 3 * Math.cos(phi);
-                    } else { // Legs/Base
-                        const angle = Math.random() * Math.PI * 2;
-                        const dist = Math.random() * 6;
-                        x = Math.cos(angle) * dist;
-                        y = -4 + (Math.random() * 2); 
-                        z = Math.sin(angle) * dist * 0.6; // Flattened depth
-                    }
-                }
-                else if (shapeType === 'Fireworks') {
-                    // Sphere explosion
-                    const theta = Math.random() * Math.PI * 2;
-                    const phi = Math.acos(2 * Math.random() - 1);
-                    const rad = Math.random() * 15;
-                    x = rad * Math.sin(phi) * Math.cos(theta);
-                    y = rad * Math.sin(phi) * Math.sin(theta);
-                    z = rad * Math.cos(phi);
                 }
 
                 targetPositions[i * 3] = x;
@@ -449,10 +627,11 @@
         // --- UI SETUP ---
         function setupUI() {
             // Shape Buttons
-            const buttons = document.querySelectorAll('.shape-btn');
+            // Only select buttons that actually control shapes (exclude music button)
+            const buttons = document.querySelectorAll('.shape-btn[data-shape]');
             buttons.forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    // Remove active class from all
+                    // Remove active class from all shape buttons
                     buttons.forEach(b => b.classList.remove('active'));
                     // Add to clicked
                     e.target.classList.add('active');
@@ -470,13 +649,33 @@
             colorInput.addEventListener('input', (e) => {
                 const color = e.target.value;
                 config.color = color;
-                material.color.set(color);
+                // material.color.set(color); // Removed to allow vertex colors to control color
                 colorBtn.style.background = color;
                 
                 // Update tension bar color too
                 document.getElementById('tension-bar').style.background = color;
                 document.getElementById('tension-bar').style.boxShadow = `0 0 10px ${color}`;
             });
+        }
+
+        // --- GALLERY UPDATE ---
+        function updateGallery() {
+            const container = document.getElementById('gallery-container');
+            const leftCard = document.getElementById('img-left');
+            const centerCard = document.getElementById('img-center');
+            const rightCard = document.getElementById('img-right');
+
+            if (!container || !leftCard || !centerCard || !rightCard) return;
+
+            // Calculate indices with wrapping
+            const total = imageList.length;
+            const leftIndex = (currentImageIndex - 1 + total) % total;
+            const rightIndex = (currentImageIndex + 1) % total;
+
+            // Update Image Sources
+            leftCard.style.backgroundImage = `url('pictures/${imageList[leftIndex]}')`;
+            centerCard.style.backgroundImage = `url('pictures/${imageList[currentImageIndex]}')`;
+            rightCard.style.backgroundImage = `url('pictures/${imageList[rightIndex]}')`;
         }
 
         // --- ANIMATION LOOP ---
@@ -505,11 +704,11 @@
             if (isHandDetected) {
                 // Determine scale based on hand distance
                 // handDistance typically ranges 0.05 (touching) to 0.8 (arms spread)
-                targetScale = 0.5 + (handDistance * 3.0); 
+                targetScale = 1 + (handDistance * 3.0); 
                 
                 // Update UI
                 document.getElementById('input-mode').innerText = "HANDS";
-                document.getElementById('input-mode').style.color = "#ffae00";
+                document.getElementById('input-mode').style.color = "#0091ff";
             } else {
                 // Idle breathing animation if no hands
                 targetScale = 1.0 + Math.sin(Date.now() * 0.002) * 0.1;
@@ -531,33 +730,222 @@
             // Lerp factor
             const lerpSpeed = 0.05;
 
+            // Calculate scatter factor based on scale
+            // When scale > 1.5 (hands opening), start scattering
+            // Max scatter at scale 3.0
+            let scatterFactor = 0;
+            if (smoothedScale > 2.8) {
+                scatterFactor = (smoothedScale - 1.5) / 1.5; // 0 to 1
+                scatterFactor = Math.min(1, scatterFactor);
+            }
+
+            // --- COLOR CHANGE LOGIC ---
+            // Handled per-particle in the loop below
+
+            // --- GALLERY LOGIC ---
+            const galleryContainer = document.getElementById('gallery-container');
+            // Exclude #main-title so it remains visible during galaxy effect
+            const uiPanels = document.querySelectorAll('.panel, #bottom-nav');
+
+            if (galleryContainer) {
+                if (scatterFactor > 0.5) {
+                    // Auto-play music on first scatter
+                    if (!musicTriggeredByGalaxy) {
+                        const audio = document.getElementById('bg-music');
+                        const musicBtn = document.getElementById('music-btn');
+                        if (audio && audio.paused) {
+                            audio.play().then(() => {
+                                if (musicBtn) {
+                                    musicBtn.innerText = "Music: ON";
+                                    musicBtn.classList.add('active');
+                                }
+                            }).catch(err => console.error("Auto-play failed:", err));
+                        }
+                        musicTriggeredByGalaxy = true;
+                    }
+
+                    // Show Gallery
+                    galleryContainer.style.opacity = '1';
+                    galleryContainer.style.pointerEvents = 'auto';
+                    
+                    // Karaoke Logic
+                    if (karaokeStartTime === 0) {
+                        karaokeStartTime = Date.now() - karaokePausedTime;
+                    }
+                    
+                    const elapsedTime = Date.now() - karaokeStartTime;
+                    let accumulatedTime = 0;
+                    let activeIndex = -1;
+                    
+                    for (let i = 0; i < karaokeLyrics.length; i++) {
+                        if (elapsedTime >= accumulatedTime && elapsedTime < accumulatedTime + karaokeLyrics[i].duration) {
+                            activeIndex = i;
+                            break;
+                        }
+                        accumulatedTime += karaokeLyrics[i].duration;
+                    }
+                    
+                    // Loop if finished
+                    if (activeIndex === -1 && elapsedTime > accumulatedTime) {
+                        karaokeStartTime = Date.now(); // Restart
+                        activeIndex = 0;
+                    }
+                    
+                    if (activeIndex !== currentKaraokeIndex) {
+                        currentKaraokeIndex = activeIndex;
+                        const line1 = document.getElementById('karaoke-line-1');
+                        const line2 = document.getElementById('karaoke-line-2');
+                        
+                        if (line1 && line2 && activeIndex !== -1) {
+                            const currentLyric = karaokeLyrics[activeIndex];
+                            const nextLyric = karaokeLyrics[(activeIndex + 1) % karaokeLyrics.length];
+                            
+                            line1.innerText = currentLyric.text;
+                            line1.classList.remove('active', 'highlight');
+                            void line1.offsetWidth; // Trigger reflow
+                            line1.classList.add('active', 'highlight');
+                            line1.style.animationDuration = `${currentLyric.duration}ms`;
+                            
+                            line2.innerText = nextLyric.text;
+                            line2.classList.remove('active', 'highlight');
+                        }
+                    }
+                    
+                    // Hide UI
+                    uiPanels.forEach(el => {
+                        el.style.opacity = '0';
+                        el.style.pointerEvents = 'none';
+                        el.style.transition = 'opacity 0.5s';
+                    });
+
+                    // Initialize gallery if needed (first show)
+                    if (galleryContainer.style.opacity === '1' && !galleryContainer.dataset.initialized) {
+                        updateGallery();
+                        galleryContainer.dataset.initialized = 'true';
+                    }
+
+                    // Navigate based on rotation velocity (Hand Swipe)
+                    const now = Date.now();
+                    
+                    // Dynamic debounce based on speed for smoother scrolling
+                    // Faster hand movement = faster image switching
+                    const speed = Math.abs(rotationVelocity);
+                    // Map speed (0.02 to 0.15) to delay (300ms to 50ms)
+                    let dynamicDelay = 300 - ((speed - 0.02) * 2000);
+                    dynamicDelay = Math.max(50, Math.min(300, dynamicDelay));
+
+                    if (now - lastGalleryUpdate > dynamicDelay) { 
+                        // Threshold for swipe detection
+                        if (rotationVelocity > 0.015) {
+                            // Swipe Right -> Previous Image
+                            currentImageIndex = (currentImageIndex - 1 + imageList.length) % imageList.length;
+                            updateGallery();
+                            lastGalleryUpdate = now;
+                        } else if (rotationVelocity < -0.015) {
+                            // Swipe Left -> Next Image
+                            currentImageIndex = (currentImageIndex + 1) % imageList.length;
+                            updateGallery();
+                            lastGalleryUpdate = now;
+                        }
+                    }
+                } else {
+                    // Hide Gallery
+                    galleryContainer.style.opacity = '0';
+                    galleryContainer.style.pointerEvents = 'none';
+
+                    // Pause Karaoke
+                    if (karaokeStartTime > 0) {
+                        karaokePausedTime = Date.now() - karaokeStartTime;
+                        karaokeStartTime = 0;
+                    }
+
+                    // Show UI
+                    uiPanels.forEach(el => {
+                        el.style.opacity = '1';
+                        el.style.pointerEvents = 'auto';
+                        el.style.transition = 'opacity 0.5s';
+                    });
+                }
+            }
+
+            // Beat Logic for Heart
+            const beatScale = 1.0 + 0.05 * Math.sin(Date.now() * 0.005);
+
             for (let i = 0; i < PARTICLE_COUNT; i++) {
                 const ix = i * 3;
                 const iy = i * 3 + 1;
                 const iz = i * 3 + 2;
 
                 // Calculate target with scale
-                const tx = targetPositions[ix] * smoothedScale;
-                const ty = targetPositions[iy] * smoothedScale;
-                const tz = targetPositions[iz] * smoothedScale;
+                let tx = targetPositions[ix] * smoothedScale;
+                let ty = targetPositions[iy] * smoothedScale;
+                let tz = targetPositions[iz] * smoothedScale;
+
+                // Apply Heart Beat to Outer Layer
+                if (config.shape === 'Heart' && heartLayer[i] === 1) {
+                    tx *= beatScale;
+                    ty *= beatScale;
+                    tz *= beatScale;
+                }
+
+                // Apply galaxy scatter effect
+                if (scatterFactor > 0) {
+                    tx += randomOffsets[ix] * scatterFactor;
+                    ty += randomOffsets[iy] * scatterFactor;
+                    tz += randomOffsets[iz] * scatterFactor;
+                }
 
                 // Move current position towards target
                 positions[ix] += (tx - positions[ix]) * lerpSpeed;
                 positions[iy] += (ty - positions[iy]) * lerpSpeed;
                 positions[iz] += (tz - positions[iz]) * lerpSpeed;
+
+                // --- COLOR INTERPOLATION ---
+                const rIndex = i * 3;
+                const currentR = particles.geometry.attributes.color.array[rIndex];
+                const currentG = particles.geometry.attributes.color.array[rIndex+1];
+                const currentB = particles.geometry.attributes.color.array[rIndex+2];
+                
+                let targetR, targetG, targetB;
+                
+                if (scatterFactor > 0) {
+                    // Galaxy Scatter -> White
+                    targetR = 1; targetG = 1; targetB = 1;
+                } else {
+                    // Default -> Config Color
+                    const c = new THREE.Color(config.color);
+                    targetR = c.r; targetG = c.g; targetB = c.b;
+                }
+                
+                // Lerp color
+                particles.geometry.attributes.color.array[rIndex] += (targetR - currentR) * 0.1;
+                particles.geometry.attributes.color.array[rIndex+1] += (targetG - currentG) * 0.1;
+                particles.geometry.attributes.color.array[rIndex+2] += (targetB - currentB) * 0.1;
             }
 
             particles.geometry.attributes.position.needsUpdate = true;
+            particles.geometry.attributes.color.needsUpdate = true;
             
-            // Auto rotate based on setting
+            // Apply rotation velocity
+            particles.rotation.y += rotationVelocity;
+            
+            // Keep X rotation stable (0)
+            particles.rotation.x += (0 - particles.rotation.x) * 0.05;
+
+            // Friction / Inertia Logic
             if(!isHandDetected) {
-                particles.rotation.y += 0.002;
-                particles.rotation.x += (0 - particles.rotation.x) * 0.05;
+                // Decelerate due to friction
+                rotationVelocity *= 0.98;
+                
+                // Maintain a minimum idle rotation
+                if (Math.abs(rotationVelocity) < 0.002) {
+                    rotationVelocity = 0.002;
+                }
             } else {
-                // If controlling, rotate based on hand position (Y-axis only)
-                particles.rotation.y += (targetRotationY - particles.rotation.y) * 0.05;
-                // Reset X rotation to 0 to keep it stable
-                particles.rotation.x += (0 - particles.rotation.x) * 0.05;
+                // While hand is detected, velocity is controlled by hand movement (in onHandsResults)
+                // We add a slight decay here too so it doesn't spin forever if hand stops moving but is still detected
+                // This simulates "holding" the object
+                rotationVelocity *= 0.90; 
             }
 
             renderer.render(scene, camera);
@@ -579,10 +967,10 @@
             }});
 
             hands.setOptions({
-                maxNumHands: 2,
+                maxNumHands: 1,
                 modelComplexity: 1,
-                minDetectionConfidence: 0.5,
-                minTrackingConfidence: 0.5
+                minDetectionConfidence: 0.8,
+                minTrackingConfidence: 0.8
             });
 
             hands.onResults(onHandsResults);
@@ -599,14 +987,14 @@
                 .then(() => {
                     document.getElementById('loader').style.opacity = '0';
                     setTimeout(() => document.getElementById('loader').style.display = 'none', 500);
-                    statusText.innerText = "Camera Active. Hand Tracking On.";
-                    statusText.style.color = "#ffae00";
+                    statusText.innerText = "Camera Đã Bật. Theo Dõi Tay Đang Chạy.";
+                    statusText.style.color = "#0091ff";
                 })
                 .catch(err => {
                     console.error("Camera error:", err);
-                    alert("Camera access denied or error. Visuals will run in auto-mode.");
+                    alert("Không thể truy cập Camera hoặc có lỗi. Hiệu ứng sẽ chạy ở chế độ tự động.");
                     document.getElementById('loader').style.display = 'none';
-                    statusText.innerText = "Camera Denied. Mouse Mode Active.";
+                    statusText.innerText = "Không Thể Truy Cập Camera. Chế Độ Chuột Đã Bật.";
                     statusText.style.color = "#ff5555";
                 });
         }
@@ -662,24 +1050,62 @@
                 avgX /= results.multiHandLandmarks.length;
                 avgY /= results.multiHandLandmarks.length;
 
-                // Map position to rotation angles
-                // Center (0.5) -> 0 rotation
-                // Range: -1.5 to 1.5 radians (approx -90 to 90 degrees)
-                // Invert X because camera is mirrored? Let's try direct mapping first.
-                // Usually: Move Right (x increases) -> Rotate Right (Y rotation decreases/increases depending on coord system)
-                // Three.js: Y rotation is around vertical axis.
-                targetRotationY = (0.5 - avgX) * 3; 
-                targetRotationX = (avgY - 0.5) * 3;
+                // Calculate velocity based on hand movement
+                if (previousHandX !== null) {
+                    // Sensitivity factor for "flick"
+                    const deltaX = avgX - previousHandX;
+                    
+                    // Add impulse to rotation velocity
+                    // We use a weighted average to smooth out jitter but respond quickly to flicks
+                    // Multiplier 20.0 makes it responsive
+                    const targetVel = deltaX * 5.0;
+                    
+                    // If moving fast, take over velocity. If moving slow, blend.
+                    if (Math.abs(targetVel) > Math.abs(rotationVelocity)) {
+                        rotationVelocity = targetVel;
+                    } else {
+                        rotationVelocity += (targetVel - rotationVelocity) * 0.2;
+                    }
+                }
+                previousHandX = avgX;
 
             } else {
                 isHandDetected = false;
+                previousHandX = null;
+            }
+        }
+
+        // --- AUDIO SETUP ---
+        function setupAudio() {
+            const audio = document.getElementById('bg-music');
+            const musicBtn = document.getElementById('music-btn');
+            
+            if(audio && musicBtn) {
+                audio.volume = 0.5; // Set default volume to 50%
+
+                musicBtn.addEventListener('click', () => {
+                    if (audio.paused) {
+                        audio.play().then(() => {
+                            musicBtn.innerText = "Music: ON";
+                            musicBtn.classList.add('active');
+                        }).catch(err => {
+                            console.error("Audio play failed:", err);
+                        });
+                    } else {
+                        audio.pause();
+                        musicBtn.innerText = "Music: OFF";
+                        musicBtn.classList.remove('active');
+                    }
+                });
             }
         }
 
         // --- BOOTSTRAP ---
         window.onload = () => {
+            preloadImages();
             initThree();
             initMediaPipe();
+            setupAudio();
         };
 
     </script>
